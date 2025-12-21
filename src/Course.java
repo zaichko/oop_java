@@ -59,7 +59,7 @@ public class Course {
             names.setLength(names.length() - 2);
         }
         return String.format(
-                "Course name: %s. %nInstructor: %s. %nStudents: %s.",
+                "Course name: %s %nInstructor: %s %nStudents: %s",
                 courseName,
                 instructor,
                 names);

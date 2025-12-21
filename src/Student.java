@@ -75,7 +75,7 @@ public class Student {
     // Textual representation of a student
     public String toString(){
         return String.format(
-                "Full name: %s. %nID: %s. %nMajor: %s. %nGPA: %.1f. %nCredits: %d.%n",
+                "Full name: %s %nID: %s %nMajor: %s %nGPA: %.1f %nCredits: %d%n",
                 name,
                 id,
                 major,
