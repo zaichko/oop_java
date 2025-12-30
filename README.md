@@ -1,117 +1,150 @@
-# Object-Oriented Student Management System (Assignment 1)
+# Vehicle Management System (Assignment 2)
 ## Project Overview
 
-This project implements an Object-Oriented Student Management System using Java. The main goal of the program is to model students and courses while demonstrating core object-oriented programming (OOP) concepts such as encapsulation, abstraction, composition, and data hiding.
+This project implements a Vehicle Management System designed to demonstrate core Object-Oriented Programming (OOP) principles in Java.
 
-The system consists of two main classes: Student and Course, as well as a driver class Main that demonstrates the program’s functionality. Through this project, Java fundamentals such as variables, data types, conditions, loops, arrays, constructors, methods, and access modifiers are applied in a practical context. The project integrates learned topics by using arrays of objects, performing data processing tasks, and enforcing proper state management through getters and setters.
+The system models different types of vehicles using inheritance and abstraction, associates them with drivers using composition and aggregation, and processes them polymorphically through a common superclass.
 
-## Class Descriptions
-### Student Class
+#### The project focuses on:
 
-The Student class represents an individual student and encapsulates all student-related data.
+Abstract classes and method overriding
 
-### Fields:
+Superclass–subclass relationships
 
-name – full name of the student
+Constructor chaining using super
 
-id – unique student ID
+Encapsulation with access modifiers
 
-major – academic program
+Safe object interaction and null handling
 
-gpa – current grade point average
+Polymorphism via arrays of superclass types
 
-credits – total earned credits
+## Class Hierarchy and Design
+### Abstract Superclass: Vehicle
 
-All fields are declared private to enforce encapsulation.
+Vehicle is an abstract class that represents the general concept of a vehicle.
 
-### Constructor:
-The constructor accepts name, id, and major as parameters and initializes gpa to 0.0 and credits to 0, ensuring a valid initial state.
+#### Fields:
 
-### Methods:
+brand (String)
 
-Getters and setters for all fields with input validation
+year (int)
 
-addCredits(int c) – increases earned credits
+driver (Driver)
 
-updateGPA(double newGPA) – updates GPA safely
+#### Key features:
 
-isHonors() – returns true if GPA is 3.5 or higher
+Declares abstract methods startEngine() and stopEngine()
 
-toString() – returns a formatted, human-readable description of the student
+Implements a concrete method displayInfo() shared by all vehicles
 
-### Course Class
+Encapsulates driver-related logic with displayDriverInfo() to ensure null-safe behavior
 
-The Course class represents an academic course and demonstrates composition, as it contains an array of Student objects.
+This design ensures that all subclasses share common structure while providing their own specific behavior.
 
-### Fields:
+### Subclasses of Vehicle
 
-courseName – name of the course
+Each subclass extends Vehicle and overrides its abstract methods.
 
-instructor – instructor’s name
+#### Car
 
-students[] – array of enrolled students
+Additional fields: doors, fuelType
 
-### Constructor:
-The constructor initializes the course name, instructor, and the size of the student array.
+Represents passenger cars with customized engine behavior
 
-### Methods:
+#### Motorcycle
 
-addStudent(Student s, int index) – adds a student at a specified index with bounds checking
+Additional field: hasSidecar
 
-courseAverageGPA() – calculates the average GPA of enrolled students
+Represents two-wheeled vehicles with optional sidecar
 
-highestCreditStudent() – returns the student with the highest number of credits
+#### Truck
 
-toString() – returns a summary of the course, including enrolled students’ names
+Additional fields: capacity, numAxles
 
-This class illustrates how objects can work together while maintaining clear responsibility boundaries.
+Represents heavy-duty vehicles
 
-## Instructions to Compile and Run
+#### Bus (Bonus class)
 
-Navigate to the src directory containing the .java files.
+Additional fields: seats, isArticulated
 
-### Compile the program:
+Demonstrates extensibility of the class hierarchy
+
+All subclasses use constructor chaining via super(brand, year) and override engine-related methods.
+
+### Driver Class and Object Relationships
+#### Driver Class
+
+Represents a driver with:
+
+name
+
+licenceNumber
+
+Includes a method displayDriverInfo() to output driver details.
+
+#### Composition and Aggregation
+
+Composition:
+Each Vehicle object holds a reference to a Driver, meaning a vehicle has a driver.
+
+Aggregation:
+A single Driver object may be associated with multiple Vehicle objects, and drivers exist independently of vehicles.
+
+Driver assignment is handled through a setter method, and all driver-related output is encapsulated within the Vehicle class to prevent null reference errors.
+
+## Main Program Logic
+
+### The Main class:
+
+Creates multiple vehicle objects of different subclasses
+
+Creates driver objects
+
+Assigns drivers to selected vehicles
+
+Stores all vehicles in an array of type Vehicle
+
+Iterates through the array and calls methods polymorphically:
+
+startEngine()
+
+displayInfo()
+
+stopEngine()
+
+displayDriverInfo()
+
+This demonstrates polymorphism, as method calls are resolved at runtime based on the actual object type.
+
+## How to Compile and Run
+
+From the src directory:
 
 javac *.java
-
-
-### Run the program:
-
 java Main
-
-
-The program will output student information, course summaries, calculated GPAs, honors statistics, and total credits.
 
 ## Screenshots
 
-Screenshots demonstrating the program output are included in the docs/screenshots/ directory. They also are provided below.
-They show:
+### Screenshots of the program output demonstrating:
 
-Printed student details using toString()
+#### Correct engine behavior for different vehicles
 
-<img width="246" height="140" alt="image" src="https://github.com/user-attachments/assets/a57d45f5-63df-431c-ac32-85ccdfdbaf4e" />
+![full_program_output.png](Assignment-2/docs/screenshots/full_program_output.png)
 
-Course summary output
+#### Proper driver association and null-safe handling
 
-<img width="613" height="81" alt="image" src="https://github.com/user-attachments/assets/5861e578-3023-4944-9c8c-1afad5c42a3a" />
+![driver_assosiation.png](Assignment-2/docs/screenshots/driver_assosiation.png)
+![null_value_handling.png](Assignment-2/docs/screenshots/null_value_handling.png)
 
-Highest GPA student
-
-<img width="255" height="26" alt="image" src="https://github.com/user-attachments/assets/14aeaeb2-78a4-41aa-98b8-cc5d4509ba8a" />
-
-Number of honors students
-
-<img width="113" height="29" alt="image" src="https://github.com/user-attachments/assets/265ca975-f75a-4c2f-961b-fe3f701e0065" />
-
-Total credits calculation
-
-<img width="193" height="24" alt="image" src="https://github.com/user-attachments/assets/855a0fbe-73e7-4070-a798-f701ac5f1ea7" />
-
-
-These screenshots confirm the correct functionality of the system.
+(See docs/screenshots/)
 
 ## Reflection
 
-Through this project, I learned how to design a small but complete Java application using object-oriented principles. Implementing encapsulation with private fields and controlled access via getters and setters helped reinforce the importance of protecting an object’s internal state. I also gained practical experience working with arrays of objects and writing methods that perform calculations across multiple instances.
+Inheritance significantly simplified the design by allowing shared fields and behavior to be defined once in the abstract Vehicle class. This reduced code duplication and made it easy to extend the system by adding new vehicle types, such as the Bus class.
 
-One of the main challenges was handling array boundaries and null values safely, especially when calculating averages or searching for specific students. This project clearly demonstrated the benefits of OOP: the code is more organized, readable, and easier to maintain. Encapsulation and abstraction made the program more robust and flexible, while composition allowed different classes to interact without tightly coupling their implementations.
+Method overriding enabled each subclass to provide its own implementation of engine behavior while maintaining a common interface. One challenge encountered was handling driver associations safely; this was resolved by encapsulating driver-related logic inside the Vehicle class, preventing NullPointerException and improving robustness. The use of protected and private access modifiers helped balance accessibility and encapsulation throughout the system.
+
+## Conclusion
+
+This project successfully demonstrates inheritance, abstraction, composition, aggregation, and polymorphism in Java. The system is designed to be extensible, readable, and safe, following clean OOP principles and meeting all assignment requirements.
